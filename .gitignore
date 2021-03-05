@@ -1,0 +1,12 @@
+tools
+
+*.cmp
+*.gif
+*.html
+*.out
+*.pdf
+*.txt
+*.tst
+*.xml
+*.iml
+*.vm
