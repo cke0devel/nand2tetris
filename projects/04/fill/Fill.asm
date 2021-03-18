@@ -11,4 +11,54 @@
 // "white" in every pixel;
 // the screen should remain fully clear as long as no key is pressed.
 
-// Put your code here.
+	@R1
+	M=0
+
+(LOOP)
+	@KBD
+	D=M
+	@BACK
+	D;JEQ
+
+(FWD)
+	@R1
+	D=M
+	@SCREEN
+	A=A+D
+	M=-1
+	D=D+1
+
+	// skip overflow
+	@8192
+	D=D-A
+	@LOOP
+	D;JGT
+
+	@R1
+	D=M
+	D=D+1
+	M=D
+
+	@LOOP
+	0;JMP
+
+(BACK)
+	@R1
+	D=M
+	@SCREEN
+	A=A+D
+	M=0
+	@R1
+	D=M
+	D=D-1
+
+	// skip underflow
+	@TONEXT
+	D;JLT
+
+	@R1
+	M=D
+
+(TONEXT)
+	@LOOP
+	0;JMP
